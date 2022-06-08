@@ -47,6 +47,28 @@ pl.xlabel("种类")
 pl.ylabel('萼片大小平均值 (cm²)')
 pos += 1
 
+# 3号条形图
+avg_bar = [0, 0, 0]
+
+for species in data['species'].unique():
+    for i in range(50):
+        avg_bar[species] += data['petal_size'][i + species * 50]
+
+# 平均数
+for i in range(3):
+    avg_bar[i] /= 50
+    avg_bar[i] = round(avg_bar[i], 2)
+
+pl.subplot(2, 2, pos)
+pl.bar(data['species'].unique(), avg_bar)
+for a, b in zip(data['species'].unique(), avg_bar):
+    pl.text(a, b, b, ha='center', va='bottom', fontsize=20)
+pl.xticks([0, 1, 2])
+pl.title("花瓣大小平均值与种类关系 - 条形图")
+pl.xlabel("种类")
+pl.ylabel('花瓣大小平均值 (cm²)')
+pos += 1
+
 
 pl.savefig("Figure.png", dpi=200)
 pl.show()
