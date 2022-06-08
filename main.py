@@ -25,5 +25,28 @@ pl.title("萼片大小与花瓣大小的关系 - 散点图")
 pos += 1
 
 
+# 2号折线图
+avg_plot = [0, 0, 0]
+
+for species in data['species'].unique():
+    for i in range(50):
+        avg_plot[species] += data['sepal_size'][i + species * 50]
+
+# 平均数
+for i in range(3):
+    avg_plot[i] /= 50
+    avg_plot[i] = round(avg_plot[i], 2)
+
+pl.subplot(2, 2, pos)
+pl.plot(data['species'].unique(), avg_plot)
+for a, b in zip(data['species'].unique(), avg_plot):
+    pl.text(a, b, b, ha='center', va='bottom', fontsize=20)
+pl.xticks([0, 1, 2])
+pl.title("萼片大小平均值与种类关系 - 折线图")
+pl.xlabel("种类")
+pl.ylabel('萼片大小平均值 (cm²)')
+pos += 1
+
+
 pl.savefig("Figure.png", dpi=200)
 pl.show()
