@@ -69,6 +69,18 @@ pl.xlabel("种类")
 pl.ylabel('花瓣大小平均值 (cm²)')
 pos += 1
 
+# 4号饼状图
+sum_pie = [0, 0, 0]
+
+for species in data['species']:
+    sum_pie[species] += 1
+
+pl.subplot(2, 2, pos)
+pl.pie(sum_pie,
+       labels=[0, 1, 2],
+       autopct='%.2f%%'
+       )
+pl.title("种类占比 - 饼状图")
 
 pl.savefig("Figure.png", dpi=200)
 pl.show()
